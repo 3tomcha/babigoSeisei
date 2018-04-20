@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         new DownloadFilesTask().execute();
 
         text = findViewById(R.id.text);
-//        text.setText(translatedword);
+        Log.d("translatedword", translatedword);
     }
 
     private class DownloadFilesTask extends AsyncTask<String,String,String> {
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 //        APIに接続し、レスポンスを得る
         public String doInBackground(String... params) {
             Log.d("TAG", "doInBackground: ");
-            String urlStr = "http://girly.lolitapunk.jp/babigoapi/index.php?word=%E3%81%94%E3%81%AF%E3%82%93%E3%81%9F%E3%81%B9%E3%81%9F%E3%81%84";
+            String targetword = "ごはんたべたい";
+            String urlStr = "http://girly.lolitapunk.jp/babigoapi/index.php?word="+targetword;
             HttpURLConnection con = null;
             InputStream is = null;
             String result = "";
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray jsarr = new JSONArray(result);
                     translatedword = jsarr.getString(1);
                     Log.d("translatedword", translatedword);
+                    text.setText(translatedword);
 
 //                    JSONObject rootJSON = new JSONObject(result);
 //                    Log.d("rootJSON", rootJSON.toString());
