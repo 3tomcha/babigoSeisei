@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         new DownloadFilesTask().execute();
 
         text = findViewById(R.id.text);
-        text.setText(translatedword);
+//        text.setText(translatedword);
     }
 
     private class DownloadFilesTask extends AsyncTask<String,String,String> {
@@ -77,15 +78,26 @@ public class MainActivity extends AppCompatActivity {
 //        受けとったjsonを加工する
         public void onPostExecute(String result) {
             Log.d("onPostExecute","onPostExecute");
-            Log.d("result",result);
             try{
                 Log.d("try","try");
+                Log.d("result",result);
 
-                JSONObject rootJSON = new JSONObject(result);
-                Log.d("rootJSON", rootJSON.toString());
+                try {
+                    JSONArray jsarr = new JSONArray(result);
+                    translatedword = jsarr.getString(1);
+                    Log.d("translatedword", translatedword);
 
-                translatedword = rootJSON.getString("translated");
-                Log.d("translatedword", translatedword);
+//                    JSONObject rootJSON = new JSONObject(result);
+//                    Log.d("rootJSON", rootJSON.toString());
+                }catch (Exception ex){
+                    Log.d("エラー","エラー");
+
+                }
+//                JSONObject JSON1 = rootJSON.getJSONObject("translated");
+
+//                translatedword = rootJSON.getString("translated");
+//                Log.d("translatedword", translatedword);
+
             }catch (Exception ex){
 
             }
