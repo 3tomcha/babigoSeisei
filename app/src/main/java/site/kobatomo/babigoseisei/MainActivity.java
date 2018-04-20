@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,12 +17,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView text;
+    String translatedword="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new DownloadFilesTask().execute();
+
+        text = findViewById(R.id.text);
+        text.setText(translatedword);
     }
 
     private class DownloadFilesTask extends AsyncTask<String,String,String> {
@@ -46,13 +55,41 @@ public class MainActivity extends AppCompatActivity {
             }
             catch(IOException ex) {
             }
+
+            finally {
+                if(con != null) {
+                    con.disconnect();  // （10）
+                }
+                if(is != null) {
+                    try {
+                        is.close();  // （11）
+                    }
+                    catch(IOException ex) {
+                    }
+                }
+            }
             return result;
         }
 
         public void onProgressUpdate(String... progress) {
         }
 
+//        受けとったjsonを加工する
         public void onPostExecute(String result) {
+            Log.d("onPostExecute","onPostExecute");
+            Log.d("result",result);
+            try{
+                Log.d("try","try");
+
+                JSONObject rootJSON = new JSONObject(result);
+                Log.d("rootJSON", rootJSON.toString());
+
+                translatedword = rootJSON.getString("translated");
+                Log.d("translatedword", translatedword);
+            }catch (Exception ex){
+
+            }
+
         }
 
 
