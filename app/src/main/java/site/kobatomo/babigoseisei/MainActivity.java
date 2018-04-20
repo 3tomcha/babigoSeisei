@@ -1,9 +1,13 @@
 package site.kobatomo.babigoseisei;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -17,8 +21,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
-    private TextView text;
+public class MainActivity extends Activity {
+    private EditText text;
     String translatedword="";
 
 
@@ -26,7 +30,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new DownloadFilesTask().execute();
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DownloadFilesTask().execute();
+            }
+        });
 
         text = findViewById(R.id.text);
         Log.d("translatedword", translatedword);
