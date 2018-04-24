@@ -4,8 +4,10 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
     private EditText text;
     String translatedword="";
     String targetword="";
@@ -30,6 +32,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("バビ語メーカー");
         setContentView(R.layout.activity_main);
 
         Button button = findViewById(R.id.button);
@@ -60,7 +63,10 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-
+//        齊藤京子の画像をセットする
+        WebView webview = findViewById(R.id.memberphoto);
+        String memberphotourl = "http://cdn.keyakizaka46.com/images/14/eec/34a579fcf71c9d239038b2f18ff30/400_320_102400.jpg";
+        webview.loadUrl(memberphotourl);
 
         text = findViewById(R.id.text);
         Log.d("translatedword", translatedword);
