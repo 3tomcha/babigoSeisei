@@ -10,6 +10,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle("バビ語メーカー");
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.button);
+        TextView button = findViewById(R.id.button);
 //        new DownloadFilesTask().execute();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button twitterbutton = findViewById(R.id.twitterbutton);
-        twitterbutton.setOnClickListener(new View.OnClickListener() {
+        ImageView twitter = findViewById(R.id.twitter);
+        twitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("twitterbutton","twitterbutton");
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button text2speeech = findViewById(R.id.text2speeech);
+        ImageView text2speeech = findViewById(R.id.text2speeech);
         text2speeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
