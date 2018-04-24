@@ -1,4 +1,10 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     </style>
+
+
+    <style name="text2speech" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:tint">@color/white</item>
+    </style>
+
 </resources>
