@@ -6,13 +6,74 @@
     android:layout_height="match_parent"
     tools:context="site.kobatomo.babigoseisei.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorGreen1">
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="30sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="バビ語に変換！"-->
+            <!--android:textScaleX="1.05"-->
+            <!--android:textColor="@color/white"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="250sp"
+            android:layout_height="200sp"
+            android:layout_gravity="center_horizontal">
+        <WebView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/memberphoto">
+        </WebView>
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:textSize="20sp"
+            android:layout_marginRight="4sp"
+            android:layout_marginLeft="4sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/edittextbackground"
+            />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="変換する"/>
+
+        <Button
+            android:id="@+id/twitterbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ツイッターに投稿する"/>
+
+        <Button
+            android:id="@+id/text2speeech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="読み上げる"/>
+
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
