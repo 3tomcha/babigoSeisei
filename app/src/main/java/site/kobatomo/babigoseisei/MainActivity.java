@@ -1,6 +1,8 @@
 package site.kobatomo.babigoseisei;
 
 import android.os.AsyncTask;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeechService;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
@@ -24,17 +26,23 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+import static android.speech.tts.TextToSpeech.SUCCESS;
+
+public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
     private EditText text;
     String translatedword="";
     String targetword="";
-
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("バビ語メーカー");
+        tts = new TextToSpeech(this,this);
+
+
         setContentView(R.layout.activity_main);
 
         TextView button = findViewById(R.id.button);
@@ -61,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
         text2speeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txt2speech();
+
+
+                    txt2speech();
             }
         });
 
@@ -73,6 +83,40 @@ public class MainActivity extends AppCompatActivity {
         text = findViewById(R.id.text);
         Log.d("translatedword", translatedword);
     }
+
+
+
+
+    @Override
+    public void onInit(int status) {
+        if (SUCCESS == status) {
+            //言語選択
+            Locale locale = Locale.JAPAN;
+            if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts.setLanguage(locale);
+            } else {
+                Log.d("Error", "Locale");
+            }
+        } else {
+            Log.d("Error", "Init");
+        }
+        this.txt2speech();
+    }
+
+    private void txt2speech() {
+        if (0 < translatedword.length()) {
+            if (tts.isSpeaking()) {
+                // 読み上げ中なら停止
+                tts.stop();
+            }
+            //読み上げられているテキストを確認
+            System.out.println(translatedword);
+            //読み上げ開始
+            tts.speak(translatedword, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
+
+
 
     //twitter投稿機能
     private class TwitterShareTask {
@@ -88,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
             builder.startChooser();
         }
     }
+
+
+
 
 //バビ語変換機能
     private class DownloadFilesTask extends AsyncTask<String,String,String> {
@@ -187,43 +234,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private String txt2speech(){
 
-        String urlStr = "https://texttospeech.googleapis.com/v1beta1/text:synthesize";
-        HttpURLConnection con = null;
-        InputStream is = null;
-        String result = "";
-
-        try{
-            URL url = new URL(urlStr);
-            Log.d("URL",url.toString());
-            con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            Log.d("con",con.toString());
-            con.connect();
-            is = con.getInputStream();
-            Log.d("is",is.toString());
-            result = is2String(is);
-            Log.d("result",result.toString());
-        }catch (MalformedURLException ex){
-        }
-        catch(IOException ex) {
-        }
-
-        finally {
-            if(con != null) {
-                con.disconnect();  // （10）
-            }
-            if(is != null) {
-                try {
-                    is.close();  // （11）
-                }
-                catch(IOException ex) {
-                }
-            }
-        }
-        return result;
-    }
 
 
 
