@@ -59,33 +59,31 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom">
+                    android:layout_gravity="bottom"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp">
 
-                    <Button
-                        android:id="@+id/twitterbutton"
+
+                    <TextView
+                        android:id="@+id/button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ツイッターに投稿する"
-                        android:background="@drawable/buttonbackground"
-                        android:layout_toStartOf="@+id/text2speeech"/>
-
-                    <Button
-                        android:id="@+id/text2speeech"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="読み上げる"
-                        android:background="@drawable/buttonbackground"
+                        android:text="バビ語"
+                        android:textSize="20sp"
                         android:layout_centerInParent="true"/>
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="変換する"
-                    android:background="@drawable/buttonbackground"
-                    android:layout_toEndOf="@+id/text2speeech"/>
+
 
                     <ImageView
-                        android:id="@id/twitterbutton"
+                        android:id="@+id/text2speeech"
+                        android:layout_width="80sp"
+                        android:layout_height="80sp"
+                        android:src="@drawable/ic_record_voice_over_black_24dp"
+                        android:layout_alignParentRight="true"
+                        style="@style/text2speech"
+                        />
+
+                    <ImageView
+                        android:id="@+id/twitter"
                         android:layout_width="100sp"
                         android:layout_height="100sp"
                         android:src="@drawable/twitter_logo"/>
