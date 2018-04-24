@@ -24,8 +24,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
         <LinearLayout
             android:layout_width="250sp"
@@ -40,38 +41,61 @@
         </LinearLayout>
 
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
         <EditText
             android:id="@+id/text"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:textSize="20sp"
+            android:layout_height="match_parent"
+            android:textSize="30sp"
             android:layout_marginRight="4sp"
             android:layout_marginLeft="4sp"
             android:gravity="center"
             android:textColor="@color/white"
             android:background="@drawable/edittextbackground"
             />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom">
+
+                    <Button
+                        android:id="@+id/twitterbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ツイッターに投稿する"
+                        android:background="@drawable/buttonbackground"
+                        android:layout_toStartOf="@+id/text2speeech"/>
+
+                    <Button
+                        android:id="@+id/text2speeech"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="読み上げる"
+                        android:background="@drawable/buttonbackground"
+                        android:layout_centerInParent="true"/>
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="変換する"
+                    android:background="@drawable/buttonbackground"
+                    android:layout_toEndOf="@+id/text2speeech"/>
+
+                    <ImageView
+                        android:id="@id/twitterbutton"
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
+                        android:src="@drawable/twitter_logo"/>
+                </RelativeLayout>
+            </FrameLayout>
 
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="変換する"/>
 
-        <Button
-            android:id="@+id/twitterbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ツイッターに投稿する"/>
-
-        <Button
-            android:id="@+id/text2speeech"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="読み上げる"/>
 
 
     </LinearLayout>
