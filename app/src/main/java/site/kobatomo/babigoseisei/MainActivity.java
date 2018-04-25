@@ -45,17 +45,18 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
         setContentView(R.layout.activity_main);
 
+//        バビ語変換機能
         TextView button = findViewById(R.id.button);
-//        new DownloadFilesTask().execute();
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("bibigo","bibigo");
                 targetword = text.getText().toString();
                 new DownloadFilesTask().execute();
             }
         });
 
+//        ツイッター機能
         ImageView twitter = findViewById(R.id.twitter);
         twitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,17 +66,16 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             }
         });
 
+//        読み上げ機能
         ImageView text2speeech = findViewById(R.id.text2speeech);
         text2speeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                     txt2speech();
             }
         });
 
-//        齊藤京子の画像をセットする
+//        齊藤京子の画像をセットする/のちに動的に取得する方法に変更する
         WebView webview = findViewById(R.id.memberphoto);
         String memberphotourl = "http://cdn.keyakizaka46.com/images/14/eec/34a579fcf71c9d239038b2f18ff30/400_320_102400.jpg";
         webview.loadUrl(memberphotourl);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
 
 
-
+//読み上げ機能
     @Override
     public void onInit(int status) {
         if (SUCCESS == status) {
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         } else {
             Log.d("Error", "Init");
         }
-        this.txt2speech();
+//        this.txt2speech();
     }
 
     private void txt2speech() {
@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             Log.d("TAG", "doInBackground: ");
 //            String targetword = "ごはんたべたい";
             String urlStr = "http://girly.lolitapunk.jp/babigoapi/index.php?word="+targetword;
+//            String urlStr = "http://girly.lolitapunk.jp/babigoapi/index.php";
+
             HttpURLConnection con = null;
             InputStream is = null;
             String result = "";
@@ -152,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 URL url = new URL(urlStr);
                 Log.d("URL",url.toString());
                 con = (HttpURLConnection) url.openConnection();
+                con.setRequestProperty("User-Agent","Mozilla/5.0");
                 Log.d("con",con.toString());
                 con.connect();
                 is = con.getInputStream();
@@ -161,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             }catch (MalformedURLException ex){
             }
             catch(IOException ex) {
+                Log.d("エラー",ex.getMessage());
             }
 
             finally {
